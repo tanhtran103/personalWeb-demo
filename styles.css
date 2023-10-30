@@ -1,0 +1,66 @@
+.top-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: darkgray;
+    color:white;
+}
+.logo {
+    font-size: 20px;
+}
+* {
+    box-sizing: border-box;
+}
+div {
+    display: block;
+}
+.top-nav-right {
+    float: right;
+}
+.top-nav a {
+    font-weight: bold;
+    float: left;
+    color:white;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 20px;
+}
+h1 {
+    text-align: center;
+    display: block;
+    font-weight: bold;
+}
+.learning, .project{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+.project {
+    display: flex;
+    justify-content: center;
+}
+.projectFrame {
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+.quotes {
+    display: flex;
+    justify-content: center;
+}
+.maxim {
+    text-align: center;
+    background-color: gray;
+    margin: 10px;
+    width: 300px;
+    height: 100px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+.description {
+    text-align: center;
+    background-color: gray;
+    border: 1px solid;
+}
