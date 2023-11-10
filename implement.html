@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="style_lab4.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .nav {
+            height: 46px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: darkgray;
+            color:white;
+            line-height: 46px;
+        }
+        .nav a {
+            color: #000;
+            text-decoration: none;
+            padding: 0 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="nav">
+                <a href="lab4.html">Requirement</a>
+                <a href="design.html">Design</a>
+                <a href = "implement.html">Implement</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="form">
+                <h1>Thông tin sinh viên</h1>
+                <div class="form-body">
+                    <form method="post" id="MyForm">
+                        <div class="form-group group-fullname">
+                            <label>Họ và tên:</label>
+                            <input required="true" type="text" name="student_fullname" id="fullname" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Mã số sinh viên:</label>
+                            <input required="true" type="text" name="student_id" id="id" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày tháng năm sinh:</label>
+                            <input type="date" name="student_birthday" id="birthday" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input required="true" type="email" name="student_email" id="email" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-success" id="btn_add">Add</button>
+                        <button type="reset" class="btn btn-warning" id="btn_reset">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <h1>Danh sách sinh viên</h1>
+            <div class="search-bar">
+                <input type ="text" id = "searchInput" placeholder="Tìm kiếm với tên hoặc mã số sinh viên..." oninput="searchStudent">
+                <button type="button" id = "searchButton" >Tìm kiếm</button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Mã SV</th>
+                        <th>Họ và tên</th>
+                        <th>Ngày tháng năm sinh</th>
+                        <th>Email</th>
+                        <th width="50"></th>
+                        <th width="50"></th>
+                    </tr>
+                </thead>
+                <tbody id="student_list">
+				
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+		var studentList = []
+		var currentIndex = -1
+
+		var json = localStorage.getItem('stdList')
+		if(json != null && json != '') {
+			studentList = JSON.parse(json)
+
+			showData()
+		}
+
+		$('#MyForm').submit(function() {
+			//Save thong tin sinh vien
+			var fname = $('#fullname').val()
+			var id = $('#id').val()
+            var birthday = $('#birthday').val()
+			var email = $('#email').val()
+
+			var std = {
+				'fullname': fname,
+				'id': id,
+                'birthday': birthday,
+				'email': email
+			}
+
+			if(currentIndex >= 0) {
+				//Sua du lieu
+				studentList[currentIndex] = std;
+				currentIndex = -1
+			} else {
+				studentList.push(std)
+			}
+			showData()
+
+			$('#btn_reset').click()
+			return false;
+		})
+
+		function editStudent(index) {
+			currentIndex = index
+
+			var std = studentList[index]
+
+			$('#fullname').val(std.fullname)
+			$('#id').val(std.id)
+            $('#birthday').val(std.birthday)
+			$('#email').val(std.email)
+		}
+
+		function deleteStudent(index) {
+			var option = confirm('Ban co muon xoa sinh vien nay khong?')
+			if(!option) return
+
+			studentList.splice(index, 1)
+			
+			showData()
+		}
+
+		function showData() {
+			$('#student_list').empty()
+			//Hien thi lai danh sach sinh vien
+			for (var i = 0; i < studentList.length; i++) {
+				$('#student_list').append(`<tr>
+                    <td>${studentList[i].id}</td>
+					<td>${studentList[i].fullname}</td>
+					<td>${studentList[i].birthday}</td>
+					<td>${studentList[i].email}</td>
+					<td><button class="btn btn-warning" onclick="editStudent(${i})">Edit</button></td>
+					<td><button class="btn btn-danger" onclick="deleteStudent(${i})">Delete</button></td>
+				</tr>`)
+			}
+			var json = JSON.stringify(studentList)
+			//Save
+			localStorage.setItem('stdList', json)
+		}
+	</script>
+</body>
+</html>
