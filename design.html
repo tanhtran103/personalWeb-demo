@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <style>
+        .nav {
+            height: 46px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: darkgray;
+            color:white;
+            line-height: 46px;
+        }
+        .nav a {
+            color: #000;
+            text-decoration: none;
+            padding: 0 24px;
+        }
+        h1 {
+            margin-top: 46px;
+            text-align: center;
+        }
+        .projectPicture {
+            height: 100%;
+            width: 100%;
+        }
+        .btn-danger btn-sm {
+            box-shadow: 0px 5px 0px 0px #d20202;
+            border-radius: 3px;
+            padding: 15px 25px;
+            background: #FF0000!important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="nav">
+            <a href="lab4.html">Requirement</a>
+            <a href="design.html">Design</a>
+            <a href = "implement.html">Implement</a>
+        </div>
+        <h1>Design</h1>
+    </div>
+    <div class="container">
+        <div class="implement">
+            <img class = "projectPicture" src="assets/projectPicture.png" alt ="Project lab 4">
+            <div class="button">
+                <a class ="btnDownload" href="assets/projectPicture.png" download="project-picture.png">
+                    <button class = "btn btn-danger btn-sm">Download</button> 
+                </a>
+                <a class = "btnFigma" target="_blank" href="https://www.figma.com/file/zmKiNSC3sdQoe8hEvRJK6m/lab-4?type=design&node-id=0-1&mode=design&t=R6pr5lNvRjuAy9Hu-0">
+                    <button class="btn btn-success btn-sm">Go to figma</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
